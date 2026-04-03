@@ -59,3 +59,4 @@ namespace MCarBot {
         pins.i2cWriteBuffer(getRpAddress(), writeCommandBuffer, false);
     }
 }
+
