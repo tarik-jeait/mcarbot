@@ -29,7 +29,7 @@ namespace MCarBot {
     }
     //% block = "MCarbot Init"
     export function McarBotInit() {
-        sendI2cWriteCommand(16, 4, 0, 0, 0, 0, 0, 0);
+        sendI2cWriteCommand(1, 4, 0, 0, 0, 0, 0, 0);
     }
     //% block = "Line Follower Sensors On"
     export function LfSensorsOn() {
