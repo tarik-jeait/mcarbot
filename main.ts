@@ -1,4 +1,11 @@
+//% color=190 weight=100 icon="\uf1ec" block="MCarBot"
+//% groups=['General','RGB LED', 'Line Follower', 'Moves']
 namespace MCarBot {
+    //% block = "MCarbot Init"
+    //% group='General'
+    export function McarBotInit() {
+        sendI2cWriteCommand(1, 4, 0, 0, 0, 0, 0, 0);
+    }
     //% block = "RGB Led Left On $red $green $blue"
     //% red.defl=255
     //% red.min=0 red.max=255
@@ -6,10 +13,12 @@ namespace MCarBot {
     //% green.min=0 green.max=255
     //% blue.defl=255
     //% blue.min=0 blue.max=255
+    //% group='RGB LED'
     export function RgbLeftLedOn(red: number, green: number, blue: number) {
         sendI2cWriteCommand(13, 4, red, green, blue, 0, 0, 0);
     }
     //% block = "RGB Led Left Off"
+    //% group='RGB LED'
     export function RgbLeftLedOff() {
         sendI2cWriteCommand(14, 4, 0, 0, 0, 0, 0, 0);
     }
@@ -20,24 +29,64 @@ namespace MCarBot {
     //% green.min=0 green.max=255
     //% blue.defl=255
     //% blue.min=0 blue.max=255
+    //% group='RGB LED'
     export function RgbRightLedOn(red: number, green: number, blue: number) {
         sendI2cWriteCommand(15, 4, red, green, blue, 0, 0, 0);
     }
     //% block = "RGB Led Right Off"
+    //% group='RGB LED'
     export function RgbRightLedOff() {
         sendI2cWriteCommand(16, 4, 0, 0, 0, 0, 0, 0);
     }
-    //% block = "MCarbot Init"
-    export function McarBotInit() {
-        sendI2cWriteCommand(1, 4, 0, 0, 0, 0, 0, 0);
-    }
     //% block = "Line Follower Sensors On"
+    //% group='Line Follower'
     export function LfSensorsOn() {
         sendI2cWriteCommand(24, 4, 0, 0, 0, 0, 0, 0);
     }
     //% block = "Line Follower Sensors Off"
+    //% group='Line Follower'
     export function LfSensorsOff() {
         sendI2cWriteCommand(25, 4, 0, 0, 0, 0, 0, 0);
+    }
+    //% block = "Move Forward"
+    //% group='Moves'
+    export function MoveForward() {
+        sendI2cWriteCommand(35, 3, 0, 0, 0, 0, 0, 0);
+    }
+    //% block = "Move Backward"
+    //% group='Moves'
+    export function MoveBackward() {
+        sendI2cWriteCommand(36, 3, 0, 0, 0, 0, 0, 0);
+    }
+    //% block = "Stop Motors"
+    //% group='Moves'
+    export function StopMotors() {
+        sendI2cWriteCommand(34, 3, 0, 0, 0, 0, 0, 0);
+    }
+    //% block = "Set Speed"
+    //% group='Moves'
+    export function SetSpeed(leftDirection: number, leftSpeed: number, rightDirection: number, rightSpeed: number) {
+        sendI2cWriteCommand(33, 3, leftDirection, leftSpeed, rightDirection, rightSpeed, 0, 0);
+    }
+    //% block = "Move Forward Distance"
+    //% group='Moves'
+    export function MoveForwardDistance(speed: number, distance: number) {
+        sendI2cWriteCommand(39, 3, speed, distance, 0, 0, 0, 0);
+    }
+    //% block = "Move Backward Distance"
+    //% group='Moves'
+    export function MoveBackwardDistance(speed: number, distance: number) {
+        sendI2cWriteCommand(40, 3, speed, distance, 0, 0, 0, 0);
+    }
+    //% block = "Turn Left Angle"
+    //% group='Moves'
+    export function TurnLeftAngle(speed: number, angle: number) {
+        sendI2cWriteCommand(41, 3, speed, angle, 0, 0, 0, 0);
+    }
+    //% block = "Turn Right Angle"
+    //% group='Moves'
+    export function TurnRightAngle(speed: number, angle: number) {
+        sendI2cWriteCommand(42, 3, speed, angle, 0, 0, 0, 0);
     }
     // note that Caml casing yields lower case
     // block text with spaces
@@ -59,4 +108,3 @@ namespace MCarBot {
         pins.i2cWriteBuffer(getRpAddress(), writeCommandBuffer, false);
     }
 }
-
