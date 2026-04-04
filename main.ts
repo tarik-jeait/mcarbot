@@ -47,7 +47,7 @@ namespace MCarBot {
         //% block="forward"
         Forward = 1,
         //% block="backward"
-        Backward = 2
+        Backward = 2,
     }
     //% block = "Line Follower Sensors Off"
     //% group='Line Follower'
