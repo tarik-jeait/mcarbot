@@ -63,9 +63,19 @@ namespace MCarBot {
     export function StopMotors() {
         sendI2cWriteCommand(34, 3, 0, 0, 0, 0, 0, 0);
     }
-    //% block = "Set Speed"
+    enum Direction {
+        //% block="forward"
+        Forward = 1,
+        //% block="backward"
+        Backward = 2
+    }
+    //% block = "Set Speed $leftDirection $leftSpeed $rightDirection $rightSpeed"
+    //% leftSpeed.defl=100
+    //% leftSpeed.min=0 green.max=100
+    //% rightSpeed.defl=100
+    //% rightSpeed.min=0 green.max=100
     //% group='Moves'
-    export function SetSpeed(leftDirection: number, leftSpeed: number, rightDirection: number, rightSpeed: number) {
+    export function SetSpeed(leftDirection: Direction, leftSpeed: number, rightDirection: Direction, rightSpeed: number) {
         sendI2cWriteCommand(33, 3, leftDirection, leftSpeed, rightDirection, rightSpeed, 0, 0);
     }
     //% block = "Move Forward Distance"
