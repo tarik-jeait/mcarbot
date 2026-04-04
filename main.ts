@@ -1,6 +1,13 @@
 //% color=190 weight=100 icon="\uf1ec" block="MCarBot"
 //% groups=['General','RGB LED', 'Line Follower', 'Moves']
 namespace MCarBot {
+
+    export enum Dir {
+        //% block = "Forward"
+        For = 1,
+        //% block = "Backward"
+        Back = 2,
+    }
     //% block = "MCarbot Init"
     //% group='General'
     export function McarBotInit() {
@@ -43,16 +50,15 @@ namespace MCarBot {
     export function LfSensorsOn() {
         sendI2cWriteCommand(24, 4, 0, 0, 0, 0, 0, 0);
     }
-    enum Direction {
-        //% block="forward"
-        Forward = 1,
-        //% block="backward"
-        Backward = 2,
-    }
     //% block = "Line Follower Sensors Off"
     //% group='Line Follower'
     export function LfSensorsOff() {
         sendI2cWriteCommand(25, 4, 0, 0, 0, 0, 0, 0);
+    }
+    //% block = "Move $dir"
+    //% group='Moves'
+    export function Move(dir: Dir): void {
+        sendI2cWriteCommand(35, 3, 0, 0, 0, 0, 0, 0);
     }
     //% block = "Move Forward"
     //% group='Moves'
@@ -69,15 +75,16 @@ namespace MCarBot {
     export function StopMotors() {
         sendI2cWriteCommand(34, 3, 0, 0, 0, 0, 0, 0);
     }
-    //% block = "Set Speed Left Direction:$leftDirection Speed:$leftSpeed Right Direction:$rightDirection Speed:$rightSpeed"
+    /*
+    //% block = "Set Speed Dir:$leftDirection Speed:$leftSpeed Direction:$rightDirection Speed:$rightSpeed"
     //% leftSpeed.defl=100
     //% leftSpeed.min=0 green.max=100
     //% rightSpeed.defl=100
     //% rightSpeed.min=0 green.max=100
     //% group='Moves'
-    export function SetSpeed(leftDirection: Direction, leftSpeed: number, rightDirection: Direction, rightSpeed: number) {
+    export function SetSpeed(leftDirection: Dir, leftSpeed: number, rightDirection: Dir, rightSpeed: number) {
         sendI2cWriteCommand(33, 3, leftDirection, leftSpeed, rightDirection, rightSpeed, 0, 0);
-    }
+    }*/
     //% block = "Move Forward Distance"
     //% group='Moves'
     export function MoveForwardDistance(speed: number, distance: number) {
