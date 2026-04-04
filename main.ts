@@ -6,7 +6,7 @@ namespace MCarBot {
     export function McarBotInit() {
         sendI2cWriteCommand(1, 4, 0, 0, 0, 0, 0, 0);
     }
-    //% block = "RGB Led Left On $red $green $blue"
+    //% block = "RGB Led Left On r:$red g:$green b:$blue"
     //% red.defl=255
     //% red.min=0 red.max=255
     //% green.defl=255
@@ -22,7 +22,7 @@ namespace MCarBot {
     export function RgbLeftLedOff() {
         sendI2cWriteCommand(14, 4, 0, 0, 0, 0, 0, 0);
     }
-    //% block = "RGB Led Right On $red $green $blue"
+    //% block = "RGB Led Right On r:$red g:$green b:$blue"
     //% red.defl=255
     //% red.min=0 red.max=255
     //% green.defl=255
@@ -42,6 +42,12 @@ namespace MCarBot {
     //% group='Line Follower'
     export function LfSensorsOn() {
         sendI2cWriteCommand(24, 4, 0, 0, 0, 0, 0, 0);
+    }
+    enum Direction {
+        //% block="forward"
+        Forward = 1,
+        //% block="backward"
+        Backward = 2
     }
     //% block = "Line Follower Sensors Off"
     //% group='Line Follower'
@@ -63,13 +69,7 @@ namespace MCarBot {
     export function StopMotors() {
         sendI2cWriteCommand(34, 3, 0, 0, 0, 0, 0, 0);
     }
-    enum Direction {
-        //% block="forward"
-        Forward = 1,
-        //% block="backward"
-        Backward = 2
-    }
-    //% block = "Set Speed $leftDirection $leftSpeed $rightDirection $rightSpeed"
+    //% block = "Set Speed Left Direction:$leftDirection Speed:$leftSpeed Right Direction:$rightDirection Speed:$rightSpeed"
     //% leftSpeed.defl=100
     //% leftSpeed.min=0 green.max=100
     //% rightSpeed.defl=100
